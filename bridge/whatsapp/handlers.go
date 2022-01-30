@@ -13,6 +13,7 @@ import (
 	"go.mau.fi/whatsmeow/types/events"
 )
 
+// nolint:gocritic
 func (b *Bwhatsapp) eventHandler(evt interface{}) {
 	switch e := evt.(type) {
 	case *events.Message:

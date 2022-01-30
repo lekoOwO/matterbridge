@@ -20,7 +20,7 @@ import (
 
 	goproto "google.golang.org/protobuf/proto"
 
-	_ "modernc.org/sqlite"
+	_ "modernc.org/sqlite" // needed for sqlite
 )
 
 const (
@@ -173,7 +173,7 @@ func (b *Bwhatsapp) JoinChannel(channel config.ChannelInfo) error {
 	if err != nil {
 		return err
 	}
-	for id, _ := range allContacts {
+	for id := range allContacts {
 		if isGroupJid(id.String()) && id.String() == channel.Name {
 			jids = append(jids, id.String())
 		}
@@ -277,7 +277,7 @@ func (b *Bwhatsapp) Send(msg config.Message) (string, error) {
 			return "", nil
 		}
 
-		_, err := b.wc.RevokeMessage(groupJID, types.MessageID(msg.ID))
+		_, err := b.wc.RevokeMessage(groupJID, msg.ID)
 
 		return "", err
 	}
